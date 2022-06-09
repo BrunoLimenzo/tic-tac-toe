@@ -1,4 +1,4 @@
-let table = [[,,],[,,],[,,]];
+const table = [[,,],[,,],[,,]];
 let actualValue ="X";
 let playsLeft = 8;
 
@@ -15,8 +15,7 @@ const allEqual = arr => arr.every(v => v === arr[0] && v != undefined);
 const checkWinner = (...params) =>{
     for(let p of params){
         if(allEqual(p)){
-           alert(`${actualValue} venceu`);
-           refresh();
+           return true;
         }
     }
 }
@@ -25,18 +24,20 @@ const updateGame = (row, column, element) => {
     if(table[row][column] === undefined){
         table[row][column] = actualValue;
         element.innerHTML = actualValue;
-       
+        playsLeft--;
 
-        checkWinner([table[0][0],table[0][1],table[0][2]], [table[1][0],table[1][1],table[1][2]],[table[0][2],table[2][1],table[2][2]],[table[0][0],table[1][1],table[2][2]], [table[0][2],table[1][1],table[2][0]]);
-
+        if(checkWinner([table[0][0],table[0][1],table[0][2]], [table[1][0],table[1][1],table[1][2]],[table[0][2],table[2][1],table[2][2]],[table[0][0],table[1][1],table[2][2]], [table[0][2],table[1][1],table[2][0]], [table[0][0],table[1][0],table[2][0]], [table[0][1],table[1][1],table[2][1]],[table[0][2],table[1][2],table[2][2]])){
+            alert(`${actualValue} venceu`);
+               refresh();
+        }
+    
         if(playsLeft <= 0){
             alert("Tie game");
             refresh();
         }
-
-        playsLeft--;
+    
         changeVal();
-    }
+    }    
 }
 
 const refresh = () =>{
@@ -45,8 +46,13 @@ const refresh = () =>{
         card.innerHTML = "";
     }
 
-    table = [[,,],[,,],[,,]];
+    for(let i = 0; i < table.length; i++){
+        for(let j = 0; j < table[i].length; j++){
+            table[i][j] = undefined;
+        }
+    }
 
     playsLeft = 9;
+    console.log(table, playsLeft);
 }
 

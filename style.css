@@ -4,7 +4,7 @@
 }
 
 body{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Times New Roman', Times, serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -21,8 +21,14 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
     height: 70vh;
-    width: 70vh;
+    width: 40vw;
     border-radius: 30%;
+}
+
+@media(max-width: 740px){
+    #bg{
+        width: 70vw;
+    }
 }
 
 .card{

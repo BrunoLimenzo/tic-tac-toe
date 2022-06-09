@@ -1,0 +1,42 @@
+:root{
+    --color-bg:#EBE5E7;
+    --color-card-default:#C47478;
+}
+
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#bg{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3,1fr);
+    grid-gap: 10px;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 70vh;
+    width: 70vh;
+    border-radius: 30%;
+}
+
+.card{
+    color: white;
+    font-size: 5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-card-default);
+    border-radius: 30px;
+    padding: 0;
+}
+
+.card:hover{
+    cursor: pointer;
+    opacity: .8;
+}

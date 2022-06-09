@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>Tic tac toe</title>
+</head>
+<body>
+    <ul id="bg">
+       <li class="card" onclick="updateGame(0,0,this)"></li>
+       <li class="card" onclick="updateGame(0,1,this)"></li>
+       <li class="card" onclick="updateGame(0,2,this)"></li>
+       <li class="card" onclick="updateGame(1,0,this)"></li>
+       <li class="card" onclick="updateGame(1,1,this)"></li>
+       <li class="card" onclick="updateGame(1,2,this)"></li>
+       <li class="card" onclick="updateGame(2,0,this)"></li>
+       <li class="card" onclick="updateGame(2,1,this)"></li>
+       <li class="card" onclick="updateGame(2,2,this)"></li>
+    </ul>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,58 +1,78 @@
-const table = [[,,],[,,],[,,]];
-let actualValue ="X";
-let playsLeft = 8;
+class Player{
 
-const changeVal = () => {
-    if(actualValue === "X"){
-        actualValue = "O";
-    }else{
-        actualValue = "X";
+    constructor(key){
+        this.key = key;
+    }
+
+    getKey = () =>{
+        return this.key;
+    }
+
+    cleanValue = () =>{
+        this.valuesOnBoard = [];
+    }
+
+    setValue = (val) =>{
+        this.valuesOnBoard.push(val);
+    }
+
+    getValue = () =>{
+        return this.valuesOnBoard;
     }
 }
 
-const allEqual = arr => arr.every(v => v === arr[0] && v != undefined);
+const WIN_CONDITIONS = [
+    [1,2,3],
+    [4,5,6],
+    [7,8,9],
+    [1,4,7],
+    [2,5,8],
+    [3,6,9],
+    [1,5,9],
+    [3,5,7]
+]
 
-const checkWinner = (...params) =>{
-    for(let p of params){
-        if(allEqual(p)){
-           return true;
-        }
-    }
-}
+const playerX = new Player("X");
+const playerO = new Player("O");
 
-const updateGame = (row, column, element) => {
-    if(table[row][column] === undefined){
-        table[row][column] = actualValue;
-        element.innerHTML = actualValue;
-        playsLeft--;
+let playerTurn;
 
-        if(checkWinner([table[0][0],table[0][1],table[0][2]], [table[1][0],table[1][1],table[1][2]],[table[0][2],table[2][1],table[2][2]],[table[0][0],table[1][1],table[2][2]], [table[0][2],table[1][1],table[2][0]], [table[0][0],table[1][0],table[2][0]], [table[0][1],table[1][1],table[2][1]],[table[0][2],table[1][2],table[2][2]])){
-            alert(`${actualValue} venceu`);
-               refresh();
-        }
-    
-        if(playsLeft <= 0){
-            alert("Tie game");
-            refresh();
-        }
-    
-        changeVal();
-    }    
-}
+function setup(){
+    playerX.cleanValue();
+    playerO.cleanValue();
 
-const refresh = () =>{
-    const cards = document.querySelectorAll(".card");
+    playerTurn = playerX;
+    cards = document.querySelectorAll(".card");
     for(let card of cards){
         card.innerHTML = "";
     }
-
-    for(let i = 0; i < table.length; i++){
-        for(let j = 0; j < table[i].length; j++){
-            table[i][j] = undefined;
-        }
-    }
-
-    playsLeft = 9;
-    console.log(table, playsLeft);
 }
 
+setup();
+
+function play(element, value){
+    if(element.innerHTML === ""){
+        element.innerHTML = playerTurn.getKey();
+        playerTurn.setValue(value);
+
+        if(checkWinner(playerTurn.getValue())){
+            alert(`${playerTurn.getKey()} has won`);
+            setup();
+        }else{
+            changeTurn();
+        }
+    }
+}
+
+function changeTurn(){
+    playerTurn = playerTurn === playerX ? playerO : playerX;
+}
+
+function checkWinner(arr){
+    for(let i of WIN_CONDITIONS){
+        if(i.every(v => arr.includes(v))){
+            return true;
+        }       
+    }
+    
+}

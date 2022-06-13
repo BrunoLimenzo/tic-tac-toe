@@ -36,13 +36,16 @@ const playerX = new Player("X");
 const playerO = new Player("O");
 
 let playerTurn;
+let turns = 1;
 
 function setup(){
     playerX.cleanValue();
     playerO.cleanValue();
 
+    turns = 1;
+
     playerTurn = playerX;
-    cards = document.querySelectorAll(".card");
+    const cards = document.querySelectorAll(".card");
     for(let card of cards){
         card.innerHTML = "";
     }
@@ -58,8 +61,12 @@ function play(element, value){
         if(checkWinner(playerTurn.getValue())){
             alert(`${playerTurn.getKey()} has won`);
             setup();
+        }else if(turns >= 9){
+            alert("tie game");
+            setup();
         }else{
             changeTurn();
+            turns++;
         }
     }
 }
@@ -76,3 +83,10 @@ function checkWinner(arr){
     }
     
 }
+
+function getCards(){
+    const cards = document.querySelectorAll("card");
+    return Array.from(cards);
+}
+
+console.log(getCards());

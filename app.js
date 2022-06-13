@@ -88,5 +88,3 @@ function getCards(){
     const cards = document.querySelectorAll("card");
     return Array.from(cards);
 }
-
-console.log(getCards());
